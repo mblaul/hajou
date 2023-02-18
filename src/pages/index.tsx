@@ -1,46 +1,16 @@
 import { type NextPage } from "next";
-import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
+import { Layout } from "../components/layout";
+import Link from "next/link";
 
 const Home: NextPage = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: userHabits } = api.habit.getUserHabits.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
   return (
-    <>
-      <Head>
-        <title>hajou - Habit Journal</title>
-        <meta name="description" content="Log your favorite habits" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            <span className="text-[hsl(280,100%,70%)]">hajou</span>
-          </h1>
-          <div>
-            <ul>
-              {userHabits
-                ? userHabits.map((userHabit) => {
-                    return (
-                      <li key={userHabit.id}>{`${
-                        userHabit.name
-                      } - ${userHabit.createdAt.toString()}`}</li>
-                    );
-                  })
-                : null}
-            </ul>
-          </div>
-          <AuthShowcase />
-        </div>
-      </main>
-    </>
+    <Layout>
+      <Link href="/habits/all">View all habits</Link>
+      <AuthShowcase />
+    </Layout>
   );
 };
 
