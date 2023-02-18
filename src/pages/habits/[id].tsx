@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Layout } from "../../components/layout";
 import { api } from "../../utils/api";
 
-const HabitCloseUp: NextPage = () => {
+const Id: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -14,7 +14,7 @@ const HabitCloseUp: NextPage = () => {
     <Layout>
       {habit ? (
         <section>
-          <h2>{habit.name}</h2>
+          <h1>{habit.name}</h1>
           <time>{habit.createdAt.toLocaleString()}</time>
         </section>
       ) : (
@@ -24,4 +24,4 @@ const HabitCloseUp: NextPage = () => {
   );
 };
 
-export default HabitCloseUp;
+export default Id;

@@ -9,7 +9,7 @@ const HabitView: NextPage = (props) => {
   if (!habits || habits.length === 0) return <div>No habbits</div>;
   return (
     <Layout>
-      <HabitsList habits={habits} />;
+      <HabitsList habits={habits} />
     </Layout>
   );
 };

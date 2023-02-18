@@ -1,41 +1,25 @@
 import { Habit } from "@prisma/client";
 import Link from "next/link";
-import { habitRouter } from "../../server/api/routers/habit";
+import { Habit as HabitClass } from "../../classes/Habit";
 
 interface Props {
   habit: Habit;
 }
 
 export const HabitCard = (props: Props) => {
+  const habit = new HabitClass(props.habit);
   return (
-    <div className="max-w-sm rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
-      <a href="#">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {props.habit.name}
-        </h5>
-      </a>
-      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-        Created at: {props.habit.createdAt.toLocaleString()}
-      </p>
-      <Link
-        href={props.habit.id}
-        className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Read more
-        <svg
-          aria-hidden="true"
-          className="ml-2 -mr-1 h-4 w-4"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </Link>
+    <div className="my-4 max-w-sm rounded-lg bg-gradient-to-r from-orange to-purple p-0.5 shadow">
+      <div className="rounded-lg border-4 border-transparent bg-gray p-6">
+        <Link href={habit.id}>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight dark:text-white">
+            {habit.name} ➡️
+          </h5>
+        </Link>
+        <p className="text-gray-700 dark:text-gray-400 mb-3 font-normal">
+          Created at: {habit.createdAt.toLocaleString()}
+        </p>
+      </div>
     </div>
   );
 };

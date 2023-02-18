@@ -5,17 +5,16 @@
 @layer base {
   html,
   body {
-    @apply font-sans;
-    @apply text-white;
+    @apply bg-gradient-to-br from-gray to-black font-sans text-white;
   }
   h1,
   h2,
   h3,
   h4 {
-    @apply font-extrabold;
+    @apply font-extrabold tracking-tight;
   }
   h1 {
-    @apply text-3xl;
+    @apply text-4xl;
   }
   h2 {
     @apply text-2xl;
