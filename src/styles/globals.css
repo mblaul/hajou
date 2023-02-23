@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply bg-gradient-to-br from-gray to-black;
+    @apply font-sans text-white;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-extrabold tracking-tight;
+  }
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+
+  form {
+    @apply container flex flex-col gap-4;
+  }
+
+  input {
+    @apply h-12 rounded-md bg-white text-lg text-gray;
+  }
+
+  button {
+    @apply m-4 rounded-lg bg-purple p-4 text-xl;
+  }
+
+  #app-container {
+    @apply min-h-screen p-4 sm:p-8;
+  }
+}
