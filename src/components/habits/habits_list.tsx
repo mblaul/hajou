@@ -9,7 +9,7 @@ export const HabitsList = (props: Props) => {
   const { habits } = props;
 
   return (
-    <div>
+    <div className="w-full">
       {habits.map((habit) => {
         return <HabitCard key={habit.id} habit={habit} />;
       })}

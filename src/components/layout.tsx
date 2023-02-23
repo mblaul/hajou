@@ -4,11 +4,11 @@ import type { PropsWithChildren } from "react";
 
 const Header = () => {
   return (
-    <header className="container flex items-center">
+    <header className="container flex items-center p-4">
       <h1 className="sm:text-[5rem]">
         <Link
           href="/"
-          className="bg-gradient-to-r from-gold via-orange to-orange bg-clip-text text-transparent shadow"
+          className="box-border bg-gradient-to-r from-gold via-orange to-orange bg-clip-text text-transparent shadow"
         >
           hajou
         </Link>
@@ -25,12 +25,10 @@ export const Layout = (props: PropsWithChildren) => {
         <meta name="description" content="Log your favorite habits" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen p-4">
+      <div id="app-container">
         <Header />
-        <main className="flex flex-col pt-4">
-          <div>
-            <div>{props.children}</div>
-          </div>
+        <main className="flex w-full flex-col pt-4 sm:pt-8">
+          <div>{props.children}</div>
         </main>
       </div>
     </>
