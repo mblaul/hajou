@@ -30,4 +30,10 @@ export const habitRouter = createTRPCRouter({
         data,
       });
     }),
+  updateHabit: protectedProcedure
+    .input(z.object({ name: z.string(), id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      const { id, ...rest } = input;
+      return ctx.prisma.habit.update({ where: { id }, data: rest });
+    }),
 });

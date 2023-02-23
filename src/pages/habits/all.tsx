@@ -6,7 +6,7 @@ import { Layout } from "../../components/layout";
 
 const HabitView: NextPage = (props) => {
   const { data: habits } = api.habit.getUserHabits.useQuery();
-  if (!habits || habits.length === 0) return <div>No habbits</div>;
+  if (!habits || habits.length === 0) return <Layout />;
   return (
     <Layout>
       <HabitsList habits={habits} />
