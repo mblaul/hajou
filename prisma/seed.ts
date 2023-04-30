@@ -3,9 +3,7 @@ import { prisma } from "../src/server/db";
 import type { Habit, User } from "@prisma/client";
 
 async function getSeedUser() {
-  const user = await prisma.user.findFirst({
-    where: { id: "cldtjeasa0000hto6gnkvrqnj" },
-  });
+  const user = await prisma.user.findFirst();
   if (!user) throw Error("No users found");
   return user;
 }

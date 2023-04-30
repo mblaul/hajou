@@ -1,6 +1,7 @@
 import { Habit } from "@prisma/client";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import type { NextPage } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Layout } from "../../components/layout";
@@ -14,10 +15,14 @@ const HabitsId: NextPage = () => {
   const { data: habit } = api.habit.getUserHabit.useQuery({
     id: id?.toString() || "",
   });
+  const updateHabit = api.habit.updateHabit.useMutation();
+  const newEntry = api.entry.createHabitEntry.useMutation();
+  const { data: entries } = api.entry.getHabitEntries.useQuery({
+    habitId: habit?.id || "",
+  });
 
   const [editModeEnabled, setEditModeEnabled] = useState(false);
 
-  const newHabit = api.habit.updateHabit.useMutation({});
   if (!habit) return <Layout />;
 
   const sharedClassnames = editModeEnabled
@@ -29,6 +34,15 @@ const HabitsId: NextPage = () => {
     setEditModeEnabled((prev) => !prev);
   }
 
+  function handleNewLogClick() {
+    if (!habit) return;
+    newEntry.mutate({
+      habitId: habit.id,
+      start: new Date().toISOString(),
+    });
+    console.log(newEntry);
+  }
+
   return (
     <Layout>
       <div>
@@ -37,7 +51,7 @@ const HabitsId: NextPage = () => {
           initialValues={{ name: habit.name }}
           onSubmit={(values, actions) => {
             setEditModeEnabled(false);
-            newHabit.mutate({
+            updateHabit.mutate({
               ...values,
               id: habit.id,
             });
@@ -67,12 +81,24 @@ const HabitsId: NextPage = () => {
                 );
               })}
 
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
+              {editModeEnabled ? (
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              ) : null}
             </Form>
           )}
         </Formik>
+        <button onClick={handleNewLogClick}>⏲️</button>
+      </div>
+      <div>
+        {entries?.map((entry) => {
+          return (
+            <div key={entry.id}>
+              <Link href={`/entries/${entry.id}`}>{entry.id}</Link>
+            </div>
+          );
+        })}
       </div>
     </Layout>
   );
