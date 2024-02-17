@@ -9,8 +9,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="h-100 w-100 bg-slate-900 text-white flex-col">
+    <header class="p-2 text-2xl">Hajou</header>
+    <main class="container h-100 mx-auto mt-4 p-2 flex-col">
       <%= yield %>
     </main>
   </body>
