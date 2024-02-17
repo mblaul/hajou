@@ -1,0 +1,12 @@
+<h1>New Habit</h1>
+<%= form_with model: @habit do |form|%>
+  <% %i(name description).each do |field_name|%>
+    <div>
+      <%= form.label field_name %>
+      <%= form.text_field field_name, class: "text-black" %>
+    </div>
+  <% end %>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

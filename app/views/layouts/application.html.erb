@@ -7,10 +7,12 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
-
   <body class="h-100 w-100 bg-slate-900 text-white flex-col">
-    <header class="p-2 text-2xl">Hajou</header>
+    <header class="p-2 text-2xl">
+      <%= link_to "Hajou", root_path %>
+    </header>
     <main class="container h-100 mx-auto mt-4 p-2 flex-col">
       <%= yield %>
     </main>
