@@ -1,0 +1,20 @@
+<%= form_with model: @habit do |form|%>
+  <% %i(name description).each do |field_name|%>
+    <div>
+      <div class="flex flex-col gap-1">
+        <%= form.label field_name %>
+        <% if @habit.errors.size.positive? %>  
+          <div class="bg-red-500">
+            <% @habit.errors.full_messages_for(field_name).each do |error_message|%>
+              <div><%= error_message %></div>
+            <% end %>
+          </div>
+        <% end %>
+        <%= form.text_field field_name, class: "text-black rounded" %>
+      </div>
+    </div>
+  <% end %>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

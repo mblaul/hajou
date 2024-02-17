@@ -21,6 +21,27 @@ class HabitsController < ApplicationController
     end
   end
 
+  def edit
+    @habit = Habit.find(params[:id])
+  end
+
+  def update
+    @habit = Habit.new(habit_params)
+
+    if @habit.save
+      redirect_to @habit
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @habit = Habit.find(params[:id])
+    @habit.destroy
+
+    redirect_to root_path, status: :see_other
+  end
+
   private
 
   def habit_params
