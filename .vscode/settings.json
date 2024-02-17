@@ -1,12 +1,16 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "rubyLsp.bundleGemfile": "./Gemfile",
   "[ruby]": {
     "editor.tabSize": 2,
     "editor.useTabStops": false,
     "editor.defaultFormatter": "Shopify.ruby-lsp"
   },
   "[erb]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "*.html.erb": "erb"
   }
 }
