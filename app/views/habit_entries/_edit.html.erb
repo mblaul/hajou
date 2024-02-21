@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "in_progress_habit_entry" do %>
+  <%= button_to 'Stop Timer', habit_habit_entry_stop_timer_path(habit_entry.habit, habit_entry), params: {id: habit_entry.id},
+    class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto"
+  %>
+<% end %>

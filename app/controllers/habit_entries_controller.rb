@@ -1,5 +1,5 @@
 class HabitEntriesController < ApplicationController
-  before_action :set_habit_entry, only: %i[show edit update destroy]
+  before_action :set_habit_entry, only: %i[show edit update destroy stop_timer]
 
   def index
     @habit_entries = HabitEntry.all
@@ -20,8 +20,8 @@ class HabitEntriesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to habit_entries_path }
         format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend('habit_habit_entries', partial: 'habit_entry',
-                                                                           locals: { habit_entry: @habit_entry })
+          render turbo_stream: turbo_stream.replace('in_progress_habit_entry', partial: 'edit',
+                                                                               locals: { habit_entry: @habit_entry })
         end
       end
     else
@@ -33,7 +33,7 @@ class HabitEntriesController < ApplicationController
     if @habit_entry.update(habit_entry_params)
       redirect_to habit_entry_url(@habit_entry), notice: 'Habit entry was successfully updated.'
     else
-      render :edit, status: 500
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -41,6 +41,20 @@ class HabitEntriesController < ApplicationController
     @habit_entry.destroy!
 
     redirect_to habit_entries_url, notice: 'Habit entry was successfully destroyed.'
+  end
+
+  def stop_timer
+    @habit_entry.end = DateTime.now
+
+    return unless @habit_entry.save
+
+    respond_to do |format|
+      format.html { redirect_to habit_entries_path }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('in_progress_habit_entry', partial: 'rate',
+                                                                             locals: { habit_entry: @habit_entry })
+      end
+    end
   end
 
   private

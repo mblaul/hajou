@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get '/habits', to: 'habits#index'
   resources :habits do
-    resources :habit_entries
+    resources :habit_entries do
+      post 'stop_timer', to: 'habit_entries#stop_timer'
+    end
   end
 end
