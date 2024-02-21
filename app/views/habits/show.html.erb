@@ -1,15 +1,27 @@
-<div class="p-2">
-  <h2 class="text-l"><%= @habit.name %></h2>
-  <p><%= @habit.description %></p>
-
-  <div>
-    <%= link_to 'Edit', edit_habit_path(@habit) %>
-  </div>
+<div class="flex flex-col gap-2">
+  <%= render 'partials/page_header' do %>
+    <%= @habit.name %>
+  <% end %>
   
-  <div>
+  <p class="text-xl"><%= @habit.description %></p>
+
+  <%= render 'partials/button' do %>
+    <%= link_to 'Edit', edit_habit_path(@habit) %>
+  <% end %>
+  
+  <%= render 'partials/button' do %>
     <%= link_to 'Destroy', habit_path(@habit), data: {
       turbo_method: :delete,
       turbo_confirm: 'Are you sure?'
     } %>
-  </div>
+  <% end %>
+
+  <%= button_to "Start New Entry", habit_habit_entries_path(@habit, habit_entry: { habit_id: @habit.id }),
+    class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto"
+  %>
+
+  <h2>Previous Entries</h2>
+  <%= turbo_frame_tag "habit_habit_entries" do %>
+    <%= render @habit.habit_entries.order(id: :desc) %>
+  <% end %>
 </div>

@@ -9,11 +9,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
-  <body class="h-100 w-100 bg-slate-900 text-white flex-col">
-    <header class="p-2 text-2xl">
+  <body class="h-screen w-screen bg-stone-800 text-white flex-col px-4">
+    <header class="py-4 text-3xl font-extrabold tracking-tight">
       <%= link_to "Hajou", root_path %>
     </header>
-    <main class="container h-100 mx-auto mt-4 p-2 flex-col">
+    <main class="container h-100 mx-auto py-4 flex-col">
       <%= yield %>
     </main>
   </body>

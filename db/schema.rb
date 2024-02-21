@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_17_004351) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_17_215655) do
+  create_table "habit_entries", force: :cascade do |t|
+    t.integer "habit_id", null: false
+    t.integer "rating"
+    t.text "notes"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_habit_entries_on_habit_id"
+  end
+
   create_table "habits", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -18,4 +30,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_004351) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "habit_entries", "habits"
 end
