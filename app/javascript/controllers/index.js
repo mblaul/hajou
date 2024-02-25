@@ -6,3 +6,6 @@ import { application } from "./application";
 
 import VisibilityController from "./visibility_controller";
 application.register("visibility", VisibilityController);
+
+import ModalController from "./modal_controller";
+application.register("modal", ModalController);

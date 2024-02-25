@@ -1,20 +1,11 @@
 <%= form_with model: habit_entry do |form|%>
-  <% %i(rating notes).each do |field_name|%>
-    <div>
-      <div class="flex flex-col gap-1">
-        <%= form.label field_name %>
-        <% if habit_entry.errors.size.positive? %>
-          <div class="bg-red-500">
-            <% habit_entry.errors.full_messages_for(field_name).each do |error_message|%>
-              <div><%= error_message %></div>
-            <% end %>
-          </div>
-        <% end %>
-        <%= form.text_field field_name, class: "text-black rounded" %>
-      </div>
-    </div>
-  <% end %>
+  <div class="flex flex-col gap-1">
+    <%= form.label :rating %>
+    <%= form.select :rating, HabitEntryStatuses.to_tuples, {}, class: "text-black" %>
+    <%= form.label :notes %>
+    <%= form.text_area :notes, class: "text-black" %>
+  </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit "Submit", "data-action" => "click->modal#close" %>
   </div>
 <% end %>

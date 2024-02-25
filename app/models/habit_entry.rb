@@ -9,6 +9,6 @@ class HabitEntry < ApplicationRecord
   end
 
   def calucate_duration
-    self.duration = self.end.to_i - self.start.to_i
+    self.duration = self.end.to_i - self.start.to_i if self.end && self.start
   end
 end

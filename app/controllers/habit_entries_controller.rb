@@ -20,8 +20,8 @@ class HabitEntriesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to habit_entries_path }
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('in_progress_habit_entry', partial: 'edit',
-                                                                               locals: { habit_entry: @habit_entry })
+          render turbo_stream: turbo_stream.replace('modal_content', partial: 'edit',
+                                                                     locals: { habit_entry: @habit_entry })
         end
       end
     else
@@ -30,10 +30,16 @@ class HabitEntriesController < ApplicationController
   end
 
   def update
-    if @habit_entry.update(habit_entry_params)
-      redirect_to habit_entry_url(@habit_entry), notice: 'Habit entry was successfully updated.'
+    if @habit_entry.save
+      respond_to do |format|
+        format.html { redirect_to habit_entries_path }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend('habit_habit_entries', partial: 'habit_entries/habit_entry',
+                                                                           locals: { habit_entry: @habit_entry })
+        end
+      end
     else
-      render :edit, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -51,8 +57,8 @@ class HabitEntriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to habit_entries_path }
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace('in_progress_habit_entry', partial: 'rate',
-                                                                             locals: { habit_entry: @habit_entry })
+        render turbo_stream: turbo_stream.replace('modal_content', partial: 'rate',
+                                                                   locals: { habit_entry: @habit_entry })
       end
     end
   end
