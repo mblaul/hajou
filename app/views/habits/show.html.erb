@@ -17,7 +17,7 @@
       "data-action" => "click->modal#open"
   %>
   <h2>Previous Entries</h2>
-  <%= turbo_frame_tag "habit_habit_entries" do %>
+  <%= turbo_frame_tag "habit_habit_entries", class: "flex flex-col gap-2" do %>
     <%= render @habit.habit_entries.order(id: :desc) %>
   <% end %>
 </div>

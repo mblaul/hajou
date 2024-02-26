@@ -30,7 +30,7 @@ class HabitEntriesController < ApplicationController
   end
 
   def update
-    if @habit_entry.save
+    if @habit_entry.update(habit_entry_params)
       respond_to do |format|
         format.html { redirect_to habit_entries_path }
         format.turbo_stream do
