@@ -9,8 +9,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
-  <body class="relative h-screen w-screen bg-stone-800 text-white flex-col" data-controller="modal">
-    <%= render 'partials/modal' %>
+  <body class="relative h-screen w-screen bg-stone-800 text-white flex-col">
     <div class="px-4">
       <header class="py-4 text-3xl font-extrabold tracking-tight">
         <%= link_to "Hajou", root_path %>

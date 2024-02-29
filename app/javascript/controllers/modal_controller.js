@@ -1,13 +1,12 @@
 import { Controller } from "@hotwired/stimulus";
 
+// TODO: Figure this out later
 export default class extends Controller {
-  static targets = ["modal_container"];
-
-  open() {
-    this.modal_containerTarget.classList.remove("hidden");
+  getModalContainerElement() {
+    return document.getElementById("modal_container");
   }
 
-  close() {
-    this.modal_containerTarget.classList.add("hidden");
-  }
+  open() {}
+
+  close() {}
 }

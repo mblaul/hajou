@@ -5,6 +5,8 @@ class HabitsController < ApplicationController
 
   def show
     @habit = Habit.find(params[:id])
+    redirect_to edit_habit_entry_path @habit.habit_entries.last if @habit.pending_habit_entry?
+    @habit
   end
 
   def new

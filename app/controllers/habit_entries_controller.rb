@@ -11,19 +11,15 @@ class HabitEntriesController < ApplicationController
     @habit_entry = HabitEntry.new
   end
 
-  def edit; end
+  def edit
+    @habit_entry = HabitEntry.find(params[:id])
+  end
 
   def create
     @habit_entry = HabitEntry.new(habit_entry_params)
 
     if @habit_entry.save
-      respond_to do |format|
-        format.html { redirect_to habit_entries_path }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('modal_content', partial: 'edit',
-                                                                     locals: { habit_entry: @habit_entry })
-        end
-      end
+      redirect_to edit_habit_entry_path(@habit_entry)
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,11 +28,7 @@ class HabitEntriesController < ApplicationController
   def update
     if @habit_entry.update(habit_entry_params)
       respond_to do |format|
-        format.html { redirect_to habit_entries_path }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend('habit_habit_entries', partial: 'habit_entries/habit_entry',
-                                                                           locals: { habit_entry: @habit_entry })
-        end
+        format.html { redirect_to @habit_entry.habit }
       end
     else
       render :new, status: :unprocessable_entity
@@ -55,10 +47,11 @@ class HabitEntriesController < ApplicationController
     return unless @habit_entry.save
 
     respond_to do |format|
-      format.html { redirect_to habit_entries_path }
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace('modal_content', partial: 'rate',
-                                                                   locals: { habit_entry: @habit_entry })
+        render turbo_stream: turbo_stream.update(
+          'habit_entry_timer',
+          partial: 'timer_stopped'
+        )
       end
     end
   end

@@ -1,7 +1,7 @@
 <%= turbo_frame_tag habit_entry, class: "rounded border-solid border-2 border-stone-500 p-2 flex gap-2" do %>
   <%= habit_entry.id %>
   <div class="flex items-center">
-    <%= habit_entry.duration %>
+    <%= pretty_print_duration(habit_entry.duration) %>
   </div>
   <div class="flex items-center">
     <%= habit_entry.rating %>
