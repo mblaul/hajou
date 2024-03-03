@@ -1,21 +1,10 @@
 <div class="flex flex-col justify-center items-center">
-  <%= turbo_frame_tag "habit_entry_timer", class: "min-h-48 flex flex-col justify-center items-center" do %>
-    <div class="text-[76px]">
-      ⏱
-    </div>
-      <%= button_to 'Stop Timer',
-        habit_habit_entry_stop_timer_path(@habit_entry.habit, @habit_entry),
-        params: { id: @habit_entry.id },
-        class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto"
-      %>
-    </div>
-  <% end %>
+  <%= render 'timer' %>
   <%= form_with model: @habit_entry, class: "flex flex-col gap-2" do |form|%>
     <%= form.label :rating %>
     <%= form.select :rating, HabitEntryStatuses.to_tuples, {}, class: "text-black" %>
     <%= form.label :notes %>
     <%= form.text_area :notes, class: "text-black" %>
-
     <%= form.submit "Submit", class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto" %>
   <% end %>
 </div>

@@ -1,5 +1,5 @@
 class HabitEntriesController < ApplicationController
-  before_action :set_habit_entry, only: %i[show edit update destroy stop_timer]
+  before_action :set_habit_entry, only: %i[show edit update destroy toggle_timer]
 
   def index
     @habit_entries = HabitEntry.all
@@ -41,19 +41,12 @@ class HabitEntriesController < ApplicationController
     redirect_to habit_entries_url, notice: 'Habit entry was successfully destroyed.'
   end
 
-  def stop_timer
-    @habit_entry.end = DateTime.now
+  def toggle_timer
+    @habit_entry.toggle_timer
 
     return unless @habit_entry.save
 
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-          'habit_entry_timer',
-          partial: 'timer_stopped'
-        )
-      end
-    end
+    respond_to(&:turbo_stream)
   end
 
   private

@@ -9,3 +9,6 @@ application.register("visibility", VisibilityController);
 
 import ModalController from "./modal_controller";
 application.register("modal", ModalController);
+
+import TimerController from "./timer_controller";
+application.register("timer", TimerController);

@@ -7,9 +7,9 @@ module ApplicationHelper
     seconds = duration % 60
 
     result = ''
-    result += "#{hours}hr " if hours > 0
-    result += "#{minutes}min " if minutes > 0
-    result += "#{seconds}sec " if seconds >= 0
+    result += "#{hours}hr " if hours.positive?
+    result += "#{minutes}min " if minutes.positive?
+    result += "#{seconds}sec" if seconds >= 0
 
     result
   end

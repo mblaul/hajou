@@ -1,0 +1,15 @@
+ <%= turbo_frame_tag "habit_entry_timer", data: { controller: 'timer' } ,class: "min-h-48 flex flex-col justify-center items-center" do %>
+    <div data-habit-entry-complete=<%= @habit_entry.end.present? %> data-timer-target="container">
+      <div class="text-[76px]">
+        ⏱
+      </div>
+      <div class="flex flex-col">
+        <div data-timer-target="duration"><%= pretty_print_duration(@habit_entry.duration)%></div>
+        <%= button_to "#{@habit_entry.complete? ? 'Start' : 'Stop'} Timer",
+          habit_habit_entry_toggle_timer_path(@habit_entry.habit, @habit_entry, params: {id: @habit_entry.id }),
+          class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto",
+          data: { action: 'click->timer#toggleTimer' }
+        %>
+      </div>
+    </div>
+  <% end %>

@@ -6,7 +6,7 @@ class CreateHabitEntries < ActiveRecord::Migration[7.1]
       t.text :notes
       t.datetime :start
       t.datetime :end
-      t.integer :duration
+      t.integer :duration, default: 0, null: false
 
       t.timestamps
     end
