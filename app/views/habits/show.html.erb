@@ -15,7 +15,7 @@
   <%= button_to "Start New Entry", habit_habit_entries_path(@habit, habit_entry: { habit_id: @habit.id }),
       class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto"
   %>
-  <h2>Previous Entries</h2>
+  <h2>Entries</h2>
   <%= turbo_frame_tag "habit_habit_entries", class: "flex flex-col gap-2" do %>
     <%= render @habit.habit_entries.order(id: :desc) %>
   <% end %>
