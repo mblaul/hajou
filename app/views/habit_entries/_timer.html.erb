@@ -1,15 +1,34 @@
- <%= turbo_frame_tag "habit_entry_timer", data: { controller: 'timer' } ,class: "min-h-48 flex flex-col justify-center items-center" do %>
-    <div data-habit-entry-complete=<%= @habit_entry.end.present? %> data-timer-target="container">
-      <div class="text-[76px]">
-        ⏱
-      </div>
-      <div class="flex flex-col">
-        <div data-timer-target="duration"><%= pretty_print_duration(@habit_entry.duration)%></div>
-        <%= button_to "#{@habit_entry.complete? ? 'Start' : 'Stop'} Timer",
-          habit_habit_entry_toggle_timer_path(@habit_entry.habit, @habit_entry, params: {id: @habit_entry.id }),
-          class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto",
-          data: { action: 'click->timer#toggleTimer' }
-        %>
+ <%= turbo_frame_tag "habit_entry_timer", class: "w-full", data: { controller: 'timer' } do %>
+    <div data-habit-entry-complete=<%= @habit_entry.end.present? %> data-timer-target="container" class="min-h-48 w-4/5 m-auto" >
+
+      <div class="flex justify-between h-36 w-full items-center gap-2 rounded border-2 border-solid border-stone-500">
+
+        <div class="flex-none justify-self-center h-full w-1/5 bg-stone-600 border-r-2 border-solid border-stone-500">
+          <div class="flex flex-col h-full justify-center items-center text-6xl">
+            <%= @habit_entry.complete? ? '👍' : '⏱' %>
+          </div>
+        </div>
+
+                
+          <div class="flex-grow h-full text-center">
+            <div class="flex flex-col h-full justify-center items-center">
+              <div class="text-5xl" data-timer-target="duration" data-duration=<%= @habit_entry.duration %> class="text-4xl">
+                <%= pretty_print_duration(@habit_entry.duration)%>
+              </div>
+            </div>
+          </div>
+
+        <div class="flex-none justify-self-center h-full w-1/5 bg-emerald-600 border-l-2 border-solid border-stone-500 <%= @habit_entry.complete? ? 'bg-emerald-700' : 'bg-rose-700' %>"
+          <div class="flex flex-col h-full justify-center items-center">
+            <%= button_to "#{@habit_entry.complete? ? '▶️' : '⏸'}",
+              habit_habit_entry_toggle_timer_path(@habit_entry.habit, @habit_entry, params: {id: @habit_entry.id }),
+              form_class: "block text-stone-300 w-full h-full",
+              class: "w-full h-full text-6xl",
+              data: { action: 'click->timer#toggleTimer' }
+            %>
+          </div>
+        </div>
+
       </div>
     </div>
   <% end %>

@@ -3,17 +3,17 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["duration", "container"];
 
-  containerTargetConnected(target) {
+  connect() {
     this.timer = new TickingTimer(
-      this.parseDuration(this.durationTarget.innerHTML),
+      parseInt(this.durationTarget.dataset.duration),
       this.onTick.bind(this)
     );
 
-    if (target.dataset.habitEntryComplete === "true") return;
+    if (this.containerTarget.dataset.habitEntryComplete === "true") return;
     this.startTimer();
   }
 
-  containerTargetDisconnected(target) {
+  disconnect() {
     this.timer.stop();
     this.timer = undefined;
   }
@@ -96,7 +96,6 @@ class TickingTimer {
 
   tick() {
     this.duration += 1;
-    console.log("duration", this.duration);
     this.onTick();
   }
 
