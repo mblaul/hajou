@@ -4,6 +4,12 @@ class HabitEntry < ApplicationRecord
   after_initialize :set_defaults
   after_validation :calucate_duration, if: -> { will_save_change_to_start? || will_save_change_to_end? }
 
+  def duration
+    return attributes['duration'] if complete?
+
+    attributes['duration'] + (DateTime.now.to_i - start.to_i)
+  end
+
   def set_defaults
     self.start ||= DateTime.now
   end
