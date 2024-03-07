@@ -1,13 +1,13 @@
 <div class="flex flex-col justify-center items-center">
   <%= render 'timer' %>
-  <%= form_with model: @habit_entry, class: "w-full flex flex-col gap-2" do |form|%>
+  <%= form_with model: @habit_entry do |form|%>
     <div>
       <%= form.label :rating %>
-      <%= form.select :rating, HabitEntryRatings.to_tuples, {}, class: "text-black" %>
+      <%= form.select :rating, HabitEntryRatings.to_tuples, {} %>
     </div>
     <div>
       <%= form.label :notes %>
-      <%= form.text_area :notes, class: "text-black" %>
+      <%= form.text_area :notes %>
     </div>
     <%= form.submit "Submit", class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto" %>
   <% end %>

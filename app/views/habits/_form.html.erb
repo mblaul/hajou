@@ -1,20 +1,9 @@
 <%= form_with model: @habit do |form|%>
   <% %i(name description).each do |field_name|%>
     <div>
-      <div class="flex flex-col gap-1">
-        <%= form.label field_name %>
-        <% if @habit.errors.size.positive? %>  
-          <div class="bg-red-500">
-            <% @habit.errors.full_messages_for(field_name).each do |error_message|%>
-              <div><%= error_message %></div>
-            <% end %>
-          </div>
-        <% end %>
-        <%= form.text_field field_name, class: "text-black rounded" %>
-      </div>
+      <%= form.label field_name %>
+      <%= form.text_field field_name %>
     </div>
   <% end %>
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit "Submit", class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto" %>
 <% end %>

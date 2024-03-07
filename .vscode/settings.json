@@ -12,5 +12,8 @@
   },
   "files.associations": {
     "*.html.erb": "erb"
+  },
+  "vscode-erb-beautify.customEnvVar": {
+    "LC_ALL": "en_US.UTF-8"
   }
 }
