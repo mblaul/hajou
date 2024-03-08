@@ -10,7 +10,9 @@ class HabitsController < ApplicationController
   end
 
   def new
-    @habit = Habit.new
+    @item = Habit.new
+    @form_name = form_name
+    @form_fields = form_fields
   end
 
   def create
@@ -24,7 +26,9 @@ class HabitsController < ApplicationController
   end
 
   def edit
-    @habit = Habit.find(params[:id])
+    @item = Habit.find(params[:id])
+    @form_name = form_name
+    @form_fields = form_fields
   end
 
   def update
@@ -48,5 +52,16 @@ class HabitsController < ApplicationController
 
   def habit_params
     params.require(:habit).permit(:name, :description)
+  end
+
+  def form_name
+    'Habit'
+  end
+
+  def form_fields
+    [
+      FormField.new(name: 'name', type: 'text_field'),
+      FormField.new(name: 'description', type: 'text_field')
+    ]
   end
 end

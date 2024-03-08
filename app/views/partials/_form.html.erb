@@ -1,0 +1,14 @@
+<div class="md:w-2/3 flex flex-col gap-4 m-auto">
+  <%= render 'partials/page_header' do %>
+    <%= @form_name %>
+  <% end %>
+  <%= form_with model: @item do |form|%>
+    <% @form_fields.map do |form_field|%>
+      <div>
+        <%= form.label form_field.name %>
+        <%= form.send(form_field.type, form_field.name)%>
+      </div>
+    <% end %>
+    <%= form.submit "Submit", class: "inline rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto" %>
+  <% end %>
+</div>

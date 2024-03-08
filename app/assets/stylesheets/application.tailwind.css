@@ -4,7 +4,7 @@
 
 @layer base {
   form:not(.button_to) {
-    @apply w-full md:w-2/3 flex flex-col gap-2 justify-center m-auto;
+    @apply w-full flex flex-col gap-2 justify-center m-auto;
   }
   label {
     @apply inline-block p-1 text-sm text-stone-200 rounded-t-lg bg-stone-600 border-2 border-stone-600;
