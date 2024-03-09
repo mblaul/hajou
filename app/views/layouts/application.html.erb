@@ -9,9 +9,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
-  <body class="relative h-screen w-screen bg-stone-800 text-white flex-col">
-    <div class="px-4">
-      <header class="py-4 text-3xl font-extrabold tracking-tighter flex">
+  <body class="relative h-screen w-screen min-w-screen max-w-[100vw] bg-stone-800 text-white flex-col">
+    <div class="px-4 overflow-x-hidden">
+      <header class="py-2 text-3xl font-extrabold tracking-tighter flex">
         <div class="flex w-12 h-[3rem] py-[6px] mr-[-2.5px]">
           <div class="flex-auto bg-purple-700"></div>
           <div class="flex-auto bg-pink-700"></div>

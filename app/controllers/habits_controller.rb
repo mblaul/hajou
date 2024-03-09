@@ -16,6 +16,7 @@ class HabitsController < ApplicationController
   end
 
   def create
+    puts '$$$$$$$$$$ in Create'
     @habit = Habit.new(habit_params)
 
     if @habit.save
@@ -32,9 +33,8 @@ class HabitsController < ApplicationController
   end
 
   def update
-    @habit = Habit.new(habit_params)
-
-    if @habit.save
+    @habit = Habit.find(params[:id])
+    if @habit.update(habit_params)
       redirect_to @habit
     else
       render :edit, status: :unprocessable_entity
