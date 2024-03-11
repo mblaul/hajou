@@ -15,6 +15,7 @@ class HabitEntriesController < ApplicationController
     @item = HabitEntry.find(params[:id])
     @form_name = 'Habit Entry'
     @form_fields = form_fields
+    @hide = true
   end
 
   def create

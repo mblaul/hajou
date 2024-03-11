@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["habitEntryForm"];
+  static targets = ["form"];
 
   toggle() {
-    this.habitEntryFormTarget.toggleAttribute("hidden");
+    this.formTarget.toggleAttribute("hidden");
   }
 }

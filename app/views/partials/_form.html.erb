@@ -1,7 +1,9 @@
-<div class="md:w-2/3 m-auto" data-visibility-target="habitEntryForm" hidden>
-  <%= render 'partials/page_header' do %>
-    <%= @form_name %>
-  <% end %>
+<div class="md:w-2/3 m-auto" data-visibility-target="form" <%= @hide ? 'hidden' : '' %>>
+  <div class="pb-4">
+    <%= render 'partials/page_header' do %>
+      <%= @form_name %>
+    <% end %>
+  </div>
   <%= form_with model: @item do |form| %>
     <% @form_fields.map do |form_field|%>
       <div>
