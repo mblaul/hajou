@@ -12,14 +12,16 @@
   <body class="relative h-screen w-screen min-w-screen max-w-[100vw] bg-stone-800 text-white flex-col">
     <div class="px-4 overflow-x-hidden">
       <header class="py-2 text-3xl font-extrabold tracking-tighter flex">
-        <div class="flex w-12 h-[3rem] py-[6px] mr-[-2.5px]">
-          <div class="flex-auto bg-purple-700"></div>
-          <div class="flex-auto bg-pink-700"></div>
-          <div class="flex-auto bg-red-700"></div>
-          <div class="flex-auto bg-orange-700"></div>
-          <div class="flex-auto bg-stone-400"></div>
+        <div class="flex py-2 px-4 rounded-lg bg-black border-2 border-stone-700">
+          <div class="flex w-12 h-[3rem] py-[6px] mr-[-2.5px]">
+            <div class="flex-auto bg-purple-700"></div>
+            <div class="flex-auto bg-pink-700"></div>
+            <div class="flex-auto bg-red-700"></div>
+            <div class="flex-auto bg-orange-700"></div>
+            <div class="flex-auto bg-stone-400"></div>
+          </div>
+          <%= link_to "hajou", habits_path, class: 'text-5xl' %>
         </div>
-        <%= link_to "hajou", habits_path, class: 'text-5xl' %>
       </header>
       <main class="container h-100 mx-auto py-4 flex-col md:max-w-screen-lg">
         <%= yield %>
