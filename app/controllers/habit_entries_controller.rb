@@ -12,7 +12,9 @@ class HabitEntriesController < ApplicationController
   end
 
   def edit
-    @habit_entry = HabitEntry.find(params[:id])
+    @item = HabitEntry.find(params[:id])
+    @form_name = 'Habit Entry'
+    @form_fields = form_fields
   end
 
   def create
@@ -27,8 +29,9 @@ class HabitEntriesController < ApplicationController
 
   def update
     if @habit_entry.update(habit_entry_params)
+      @habit = @habit_entry.habit
       respond_to do |format|
-        format.html { redirect_to @habit_entry.habit }
+        format.html { redirect_to @habit }
       end
     else
       render :new, status: :unprocessable_entity
@@ -42,6 +45,9 @@ class HabitEntriesController < ApplicationController
   end
 
   def toggle_timer
+    @item = HabitEntry.find(params[:id])
+    @form_name = 'Habit Entry'
+    @form_fields = form_fields
     @habit_entry.toggle_timer
 
     return unless @habit_entry.save
@@ -57,5 +63,12 @@ class HabitEntriesController < ApplicationController
 
   def habit_entry_params
     params.require(:habit_entry).permit(:habit_id, :start, :end, :rating, :notes)
+  end
+
+  def form_fields
+    [
+      FormField.new(name: 'rating', type: 'select', options: [HabitEntryRatings.to_tuples, {}]),
+      FormField.new(name: 'notes', type: 'text_area')
+    ]
   end
 end

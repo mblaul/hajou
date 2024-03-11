@@ -16,7 +16,6 @@ class HabitsController < ApplicationController
   end
 
   def create
-    puts '$$$$$$$$$$ in Create'
     @habit = Habit.new(habit_params)
 
     if @habit.save
