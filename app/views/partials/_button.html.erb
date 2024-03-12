@@ -1,0 +1,11 @@
+<% variant ||= 'medium' %>
+<% case variant %>
+<% when 'small' %>
+  <div class="inline flex-shrink-0 rounded text-sm text-stone-300 bg-stone-600 p-1 border-2 border-solid border-stone-500 w-auto">
+    <%= yield %>
+  </div>
+<% when 'medium' %>
+  <div class="inline flex-shrink-0 rounded text-stone-300 bg-stone-600 p-2 border-2 border-solid border-stone-500 w-auto">
+    <%= yield %>
+  </div>
+<% end %>

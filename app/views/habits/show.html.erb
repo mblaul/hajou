@@ -1,0 +1,31 @@
+<div class="">
+  <div class="flex flex-col md:flex-row md:items-center w-max-content gap-3 py-6">
+    <%= render 'partials/page_header' do %>
+      <%= @habit.name %>
+    <% end %>
+    <div class="flex flex-shrink-0 items-start md:justify-center gap-2">
+      <%= render 'partials/button', variant: 'small' do %>
+        <%= button_to "Start New Entry →", habit_habit_entries_path(@habit, habit_entry: { habit_id: @habit.id }) %>
+      <% end %>
+      <%= render 'partials/button', variant: 'small' do %>
+        <%= link_to 'Edit', edit_habit_path(@habit) %>
+      <% end %>
+      <%= render 'partials/button', variant: 'small' do %>
+        <%= link_to 'Destroy', habit_path(@habit), data: {
+          turbo_method: :delete,
+          turbo_confirm: 'Are you sure?'
+        } %>
+      <% end %>
+    </div>
+  </div>
+  <p class="text-lg max-w-6xl"><%= @habit.description %></p>
+  <div class="w-full h-1 mt-2 mb-4 bg-gradient-to-r from-60% from-purple-600 to-orange-600"></div>
+  <h2 class="text-xl font-semibold max-w-64">Entries</h2>
+  <div class="py-2">
+    <%= turbo_frame_tag "habit_habit_entries" do %>
+      <div class="flex flex-col gap-2">
+        <%= render @habit.habit_entries.order(id: :desc) %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="border-stone-500 border-solid border-2 flex flex-row min-h-40 h-40 shadow-md">
+  <div data-role="icon" class="px-2 min-w-24 h-full bg-stone-400 flex justify-center items-center flex-0 bg-stone-400">🎹</div>
+  <div class="w-full text-stone-300 flex p-4 gap-2 justify-between min-w-0">
+    <div class="flex-auto truncate">
+      <%= link_to item.name, item, class: "text-3xl font-semibold"%>
+      <p class="truncate text-wrap"><%= item.description %></p>
+    </div>
+    <div class="self-center flex-shrink-0">
+      <%= button_to "Start New Entry →", habit_habit_entries_path(item, habit_entry: { habit_id: item.id }), class: "rounded-sm p-2 shadow-md bg-gradient-to-br from-33% from-purple-700 to-pink-700" %>
+    </div>
+  </div>
+</div>

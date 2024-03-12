@@ -1,0 +1,12 @@
+<%= turbo_frame_tag habit_entry do %>
+  <div class="rounded border-solid border-2 border-stone-500 flex flex-col">
+    <div class="flex border-b-2 border-solid border-stone-500 bg-stone-500 p-2">
+      <%= habit_entry.created_at.strftime("%m/%d/%Y") %> |
+      <%= habit_entry_rating_to_icon(habit_entry.rating)%> |
+      <%= pretty_print_duration(habit_entry.duration) %>
+    </div>
+    <div class="flex flex-col gap-2 p-2">
+      <div><%= habit_entry.notes.to_s %></div>
+    </div>
+  </div>
+<% end %>
