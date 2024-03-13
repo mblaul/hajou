@@ -1,33 +1,40 @@
 class HabitEntry < ApplicationRecord
   belongs_to :habit
 
-  after_initialize :set_defaults
-  after_validation :calucate_duration, if: -> { will_save_change_to_start? || will_save_change_to_end? }
+  STATES = {
+    running: 'running',
+    stopped: 'stopped',
+    completed: 'completed'
+  }.freeze
 
-  def duration
-    return attributes['duration'] if complete?
+  state_machine initial: STATES[:stopped] do
+    before_transition STATES[:running] => STATES[:stopped] do |habit_entry, _transition|
+      habit_entry.duration = habit_entry.duration + (DateTime.now.to_i - habit_entry.start.to_i)
+    end
+    before_transition STATES[:stopped] => STATES[:running] do |habit_entry, _transition|
+      habit_entry.start = DateTime.now
+      habit_entry.end = nil
+    end
 
-    attributes['duration'] + (DateTime.now.to_i - start.to_i)
-  end
+    event :run do
+      transition all => STATES[:running]
+    end
 
-  def set_defaults
-    self.start ||= DateTime.now
-  end
+    event :stop do
+      transition STATES[:running] => STATES[:stopped]
+    end
 
-  def calucate_duration
-    self.duration += self.end.to_i - self.start.to_i if self.end && self.start
-  end
-
-  def toggle_timer
-    if complete?
-      self.start = DateTime.now
-      self.end = nil
-    else
-      self.end = DateTime.now
+    event :complete do
+      transition STATES[:stopped] => STATES[:completed]
     end
   end
 
-  def complete?
-    self.start.present? && self.end.present?
+  def toggle_timer
+    case state
+    when STATES[:running]
+      stop!
+    when STATES[:stopped]
+      run!
+    end
   end
 end

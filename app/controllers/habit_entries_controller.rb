@@ -20,7 +20,7 @@ class HabitEntriesController < ApplicationController
 
   def create
     @habit_entry = HabitEntry.new(habit_entry_params)
-
+    @habit_entry.run
     if @habit_entry.save
       redirect_to edit_habit_entry_path(@habit_entry)
     else
@@ -29,6 +29,7 @@ class HabitEntriesController < ApplicationController
   end
 
   def update
+    @habit_entry.complete
     if @habit_entry.update(habit_entry_params)
       @habit = @habit_entry.habit
       respond_to do |format|
