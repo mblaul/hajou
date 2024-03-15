@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Hajou
   class Application < Rails::Application
-    VERSION = '0.1.0'
+    VERSION = '0.1.1'
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

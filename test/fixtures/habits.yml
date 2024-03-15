@@ -1,9 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+habit:
+  name: Habit
+  description: Here is a description for a habit
 
-one:
-  name: MyString
-  description: MyText
-
-two:
-  name: MyString
-  description: MyText
+habit_with_running_entry:
+  name: Habit with running Entry
+  description: Here is another description

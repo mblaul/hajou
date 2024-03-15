@@ -1,13 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+habit_entry:
+  habit: habit
 
-one:
-  habit: one
-  rating: MyString
-  notes: MyText
-  time: 2024-02-17 16:56:55
-
-two:
-  habit: two
-  rating: MyString
-  notes: MyText
-  time: 2024-02-17 16:56:55
+running_habit_entry:
+  state: <%= HabitEntry::STATES[:running] %>
+  start: <%= DateTime.now - 5.seconds %>
+  habit: habit_with_running_entry

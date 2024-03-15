@@ -1,45 +1,41 @@
-require "test_helper"
+require 'test_helper'
 
 class HabitEntriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @habit_entry = habit_entries(:one)
+    @habit_entry = habit_entries(:habit_entry)
   end
 
-  test "should get index" do
-    get habit_entries_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_habit_entry_url
-    assert_response :success
-  end
-
-  test "should create habit_entry" do
-    assert_difference("HabitEntry.count") do
-      post habit_entries_url, params: { habit_entry: { habit_id: @habit_entry.habit_id, notes: @habit_entry.notes, rating: @habit_entry.rating, time: @habit_entry.time } }
+  test 'should create habit_entry' do
+    assert_difference('HabitEntry.count') do
+      post habit_entries_url,
+           params: {
+             habit_entry: {
+               habit_id: @habit_entry.habit_id
+             }
+           }
     end
 
-    assert_redirected_to habit_entry_url(HabitEntry.last)
+    assert_redirected_to edit_habit_entry_url(HabitEntry.last)
   end
 
-  test "should show habit_entry" do
-    get habit_entry_url(@habit_entry)
-    assert_response :success
-  end
-
-  test "should get edit" do
+  test 'should get edit' do
     get edit_habit_entry_url(@habit_entry)
     assert_response :success
   end
 
-  test "should update habit_entry" do
-    patch habit_entry_url(@habit_entry), params: { habit_entry: { habit_id: @habit_entry.habit_id, notes: @habit_entry.notes, rating: @habit_entry.rating, time: @habit_entry.time } }
-    assert_redirected_to habit_entry_url(@habit_entry)
+  test 'should update habit_entry' do
+    patch habit_entry_url(@habit_entry),
+          params: {
+            habit_entry: {
+              notes: 'This was great',
+              rating: HabitEntryRatings::EXCELLENT
+            }
+          }
+    assert_redirected_to habit_url(@habit_entry.habit)
   end
 
-  test "should destroy habit_entry" do
-    assert_difference("HabitEntry.count", -1) do
+  test 'should destroy habit_entry' do
+    assert_difference('HabitEntry.count', -1) do
       delete habit_entry_url(@habit_entry)
     end
 

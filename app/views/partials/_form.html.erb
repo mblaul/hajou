@@ -4,11 +4,11 @@
       <%= @form_name %>
     <% end %>
   </div>
-  <%= form_with model: @item do |form| %>
+  <%= form_with model: @item, class: "w-full flex flex-col gap-2 justify-center m-auto" do |form| %>
     <% @form_fields.map do |form_field|%>
       <div>
-        <%= form.label form_field.name %>
-        <%= form.send(form_field.type, form_field.name, *form_field.options)%>
+        <%= form.label form_field.name, class: "inline-block p-1 text-sm text-stone-200 rounded-t-lg bg-stone-600 border-2 border-stone-600" %>
+        <%= form.send(form_field.type, form_field.name, *form_field.options, {class: "block text-black w-full rounded-b rounded-tr bg-stone-200 border-4 border-stone-600"}) %>
       </div>
     <% end %>
     <%= form.submit "Submit",
