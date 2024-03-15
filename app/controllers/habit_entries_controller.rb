@@ -1,10 +1,6 @@
 class HabitEntriesController < ApplicationController
   before_action :set_habit_entry, only: %i[show edit update destroy toggle_timer]
 
-  def index
-    @habit_entries = HabitEntry.all
-  end
-
   def show; end
 
   def new
@@ -47,7 +43,7 @@ class HabitEntriesController < ApplicationController
   end
 
   def toggle_timer
-    @item = HabitEntry.find(params[:id])
+    @item = @habit_entry
     @form_name = 'Habit Entry'
     @form_fields = form_fields
     @habit_entry.toggle_timer

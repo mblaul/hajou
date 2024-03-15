@@ -1,10 +1,11 @@
 class HabitsController < ApplicationController
+  before_action :set_habit, only: %i[show edit update destroy]
+
   def index
     @habits = Habit.all
   end
 
   def show
-    @habit = Habit.find(params[:id])
     redirect_to edit_habit_entry_path @habit.habit_entries.last if @habit.pending_habit_entry?
     @habit
   end
@@ -26,13 +27,12 @@ class HabitsController < ApplicationController
   end
 
   def edit
-    @item = Habit.find(params[:id])
+    @item = @habit
     @form_name = form_name
     @form_fields = form_fields
   end
 
   def update
-    @habit = Habit.find(params[:id])
     if @habit.update(habit_params)
       redirect_to @habit
     else
@@ -48,6 +48,10 @@ class HabitsController < ApplicationController
   end
 
   private
+
+  def set_habit
+    @habit = Habit.find(params[:id])
+  end
 
   def habit_params
     params.require(:habit).permit(:name, :description)

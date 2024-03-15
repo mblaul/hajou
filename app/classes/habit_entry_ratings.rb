@@ -5,7 +5,7 @@ class HabitEntryRatings
   BAD = 2
   HORRIBLE = 1
 
-  def self.valid_raiting?(value)
+  def self.valid_rating?(value)
     valid_rating_values = constants.map { |rating_constant| const_get rating_constant }
     valid_rating_values.include? value
   end
